@@ -8,6 +8,14 @@ import methods from 'methods'
 import { isFunc } from '~/shared/utils'
 
 class Router {
+  static regActuator(register) {
+    let router = new this()
+
+    register(router)
+
+    return router.routes
+  }
+
   constructor() {
     this._initMethods()
     this.routes = []
@@ -29,14 +37,10 @@ class Router {
       middlewares = []
     }
 
-    let router = new Router()
-
-    register(router)
-
     this.routes.push({
       path,
       middlewares,
-      routes: router.routes
+      routes: this.constructor.regActuator(register)
     })
   }
 }

@@ -8,16 +8,12 @@ import Router from './Router'
 import match from './match'
 
 const routerRegister = register => {
-  let router = new Router()
-
-  register(router)
-
-  let routes = router.routes
-
   return (ctx, next) => {
     console.log('ctx:', ctx)
-    console.log('match:', match(ctx, routes))
+    console.log('match:', match(ctx, Router.regActuator(register)))
     ctx.body = { status: 200, data: { accountId: 123456 } }
+
+    next()
   }
 }
 

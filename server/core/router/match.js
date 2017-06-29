@@ -26,7 +26,7 @@ const recMatch = (reqUrl, reqMethod, routes, { path: basePath = '/', middlewares
           return {
             ...route,
             middlewares: baseMid,
-            wholePath: resolvedPath,
+            route: resolvedPath,
             pathRegexp,
             params
           }

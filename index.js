@@ -7,6 +7,7 @@
 require('babel-register')({
   'presets': ['es2015', 'stage-0'],
   'plugins': [
+    'add-module-exports',
     [
       'babel-plugin-relative-import',
       {

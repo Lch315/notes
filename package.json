@@ -5,11 +5,13 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.js"
+    "start": "node index.js",
+    "dev": "node --inspect index.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "babel-plugin-add-module-exports": "^0.2.1",
     "babel-plugin-relative-import": "^1.0.3",
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
@@ -17,5 +19,6 @@
     "koa": "^2.2.0",
     "methods": "^1.1.2",
     "path-to-regexp": "^1.7.0"
-  }
+  },
+  "devDependencies": {}
 }
