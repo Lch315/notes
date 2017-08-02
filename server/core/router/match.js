@@ -48,11 +48,6 @@ const recMatch = (reqUrl, reqMethod, routes, { path: basePath = '/', middlewares
 
 const resolvePath = (basePath, path) => `${ basePath }${ path.replace(/^\/|\/$/g, '') }`
 
-const match = ({ req: { method }, path }, routes) => {
-  method = method.toLowerCase()
-
-  return recMatch(path, method, routes)
-}
-
+const match = ({ req: { method }, path }, routes) => recMatch(path, method.toLowerCase(), routes)
 
 export default match
