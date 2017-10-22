@@ -4,6 +4,7 @@ const express = require('express');
 const webpack = require('webpack');
 const webpackConfig = require('./webpack/webpack.dev.conf');
 
+const port = process.env.PORT ? Number(process.env.PORT) + 1 : 8089;
 const app = express()
 const compiler = webpack(webpackConfig)
 
@@ -22,8 +23,6 @@ const hotMiddleware = require('webpack-hot-middleware')(compiler, {
 
 app.use(hotMiddleware);
 app.use(devMiddleware);
-
-var port = process.env.PORT ? Number(process.env.PORT) + 1 : 8089;
 
 app.listen(port, function onAppListening(err) {
   if (err) {
