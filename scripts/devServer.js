@@ -5,8 +5,8 @@ const webpack = require('webpack');
 const webpackConfig = require('./webpack/webpack.dev.conf');
 
 const port = process.env.PORT ? Number(process.env.PORT) + 1 : 8089;
-const app = express()
-const compiler = webpack(webpackConfig)
+const app = express();
+const compiler = webpack(webpackConfig);
 
 const devMiddleware = require('webpack-dev-middleware')(compiler, {
   quiet: false,
@@ -14,12 +14,12 @@ const devMiddleware = require('webpack-dev-middleware')(compiler, {
   publicPath: webpackConfig.output.publicPath,
   headers: { 'Access-Control-Allow-Origin': '*' },
   stats: { colors: true },
-})
+});
 
 const hotMiddleware = require('webpack-hot-middleware')(compiler, {
-  log: false,
+  // log: false,
   heartbeat: 2000,
-})
+});
 
 app.use(hotMiddleware);
 app.use(devMiddleware);

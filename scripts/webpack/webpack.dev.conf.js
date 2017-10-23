@@ -10,7 +10,7 @@ const config = {
     index: ['webpack-hot-middleware/client', './client/index.js'],
   },
   output: {
-    path: rootPath + '/assets',
+    path: path.resolve(rootPath, 'assets'),
     filename: '[name].js',
     chunkFilename: '[name].[chunkhash:8].js',
     publicPath: '/',
@@ -19,32 +19,23 @@ const config = {
     rules: [
       {
         test: /\.(js|jsx)$/,
-        include: ['node_modules'],
-        loader: 'babel-loader',
-        query: {
-          presets: [
-            ['react', {}],
-            ['es2015', {}],
-            ['stage-0', {}],
-            ['react-hmre', {}],
-          ],
-          plugins: [
-            'add-module-exports',
-            'transform-runtime',
-          ],
-        },
-      },
-      {
-        test: /\.css$/,
+        exclude: /node_modules/,
         use: [
-          'style-loader',
           {
-            loader: 'css-loader',
-            options: {
-              importLoaders: 1,
+            loader: 'babel-loader',
+            query: {
+              presets: [
+                'react',
+                'es2015',
+                'stage-0',
+                'react-hmre',
+              ],
+              plugins: [
+                'add-module-exports',
+                'transform-runtime',
+              ],
             },
           },
-          'postcss-loader',
         ],
       },
       {
@@ -57,35 +48,50 @@ const config = {
               importLoaders: 1,
             },
           },
-          'postcss-loader',
+          {
+            loader: 'postcss-loader',
+            options: {
+              plugins: () => [
+                require('autoprefixer'),
+              ],
+            },
+          },
           'sass-loader',
         ],
       },
       {
         test: /\.(woff|woff2|ttf|eot|svg)$/,
-        loader: 'file-loader',
-        options: {
-          name: 'fonts/[name].[hash:8].[ext]',
-        },
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: 'fonts/[name].[hash:8].[ext]',
+            },
+          },
+        ],
       },
       {
         test: /\.(jpeg|jpg|png|gif|svg)$/,
-        loader: 'url-loader',
-        options: {
-          limit: 8192,
-          name: 'images/[name].[hash:8].[ext]',
-        },
+        use: [
+          {
+            loader: 'url-loader',
+            options: {
+              limit: 8192,
+              name: 'images/[name].[hash:8].[ext]',
+            },
+          },
+        ],
       },
       {
         test: /\.html$/,
-        loader: 'html-loader',
+        use: ['html-loader'],
       },
     ],
   },
   resolve: {
     modules: [
-      'client',
-      'node_modules',
+     'client',
+     'node_modules',
     ],
     extensions: ['.js', '.jsx', '.scss'],
   },
@@ -97,9 +103,8 @@ const config = {
     new webpack.NoEmitOnErrorsPlugin(),
     new HtmlWebpackPlugin({
       filename: 'index.html',
-      template: './client/index.html',
+      template: 'client/index.html',
       chunks: ['vendors', 'index'],
-      inject: true,
     }),
   ],
 };

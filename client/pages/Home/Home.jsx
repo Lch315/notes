@@ -13,7 +13,7 @@ class Home extends Component {
   render() {
     return (
       <article className="">
-        xxxxxxxx
+        xxxxxxxxxxxxx
       </article>
     );
   }

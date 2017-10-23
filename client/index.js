@@ -8,8 +8,8 @@ import Home from 'pages/Home';
 const history = createBrowserHistory();
 
 render(
-  <Router>
+  <Router history={history}>
     <Route path="/" component={Home} />
   </Router>,
-  document.body
+  document.getElementById('app')
 );
