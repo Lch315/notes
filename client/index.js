@@ -1,15 +1,13 @@
 import React from 'react';
 import { render } from 'react-dom';
-import { Router, Route } from 'react-router';
-import { createBrowserHistory } from 'history';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
-import Home from 'pages/Home';
-
-const history = createBrowserHistory();
+import routes from 'route';
+import routeGenerator from 'routeGenerator';
 
 render(
-  <Router history={history}>
-    <Route path="/" component={Home} />
-  </Router>,
+  <BrowserRouter>
+    { routeGenerator(routes) }
+  </BrowserRouter>,
   document.getElementById('app')
 );
