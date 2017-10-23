@@ -8,19 +8,17 @@ import compose from 'koa-compose'
 import Router from './Router'
 import match from './match'
 
-const routerRegister = register => {
-  return (ctx, next) => {
-    let route = match(ctx, Router.regActuator(register))
+const routerRegister = register => (ctx, next) => {
+  let route = match(ctx, Router.regActuator(register))
 
-    if (route) {
-      let { controller, middlewares, params } = route
+  if (route) {
+    let { controller, middlewares, params } = route
 
-      ctx.params = params
+    ctx.params = params
 
-      compose([ ...middlewares, controller ])(ctx, next)
-    } else {
-      next()
-    }
+    compose([ ...middlewares, controller ])(ctx, next)
+  } else {
+    next()
   }
 }
 

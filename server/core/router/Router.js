@@ -9,7 +9,7 @@ import { isFunc } from '~/shared/utils'
 
 class Router {
   static regActuator(register) {
-    let router = new this()
+    let router = new Router()
 
     register(router)
 
