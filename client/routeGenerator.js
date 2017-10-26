@@ -6,8 +6,12 @@ const resolvePath = (basePath, path) => `${ basePath.replace(/\/$/, '') }/${ pat
 
 const generator = (routes, { path: parentPath = '' } = {}) => {
   if (!Array.isArray(routes)) {
-    const { path, indexRoute, childRoutes = [] } = routes;
-    return generator(indexRoute ? [ { ...indexRoute, path, exact: true, }, ...childRoutes ] : childRoutes, routes);
+    return (
+      <Route
+        path={routes.path}
+        component={compileComponent(routes)}
+      />
+    );
   }
 
   if (routes.length === 0) {
@@ -37,8 +41,8 @@ const generator = (routes, { path: parentPath = '' } = {}) => {
 };
 
 const compileComponent = (route) => {
-  const { component, getComponent } = route;
-  const child = generator(route);
+  const { component, getComponent, path, indexRoute, childRoutes = [] } = route;
+  const child = generator(indexRoute ? [ { ...indexRoute, path, exact: true, }, ...childRoutes ] : childRoutes, route);
 
   if (component) {
     return componentWrapper(component, child);

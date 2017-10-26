@@ -6,7 +6,6 @@ const webpack = require('webpack');
 const parseRange = require('range-parser');
 const mime = require('mime');
 
-
 const webpackConfig = require('./webpack/webpack.dev.conf');
 
 const port = process.env.PORT ? Number(process.env.PORT) + 1 : 8089;
@@ -18,7 +17,7 @@ const handleRangeHeaders = (content, req, res) => {
   //assumes express API. For other servers, need to add logic to access alternative header APIs
   res.setHeader("Accept-Ranges", "bytes");
   if(req.headers.range) {
-    var ranges = parseRange(content.length, req.headers.range);
+    const ranges = parseRange(content.length, req.headers.range);
 
     // unsatisfiable
     if(-1 == ranges) {
@@ -30,7 +29,7 @@ const handleRangeHeaders = (content, req, res) => {
     if(-2 != ranges && ranges.length === 1) {
       // Content-Range
       res.statusCode = 206;
-      var length = content.length;
+      const length = content.length;
       res.setHeader(
         "Content-Range",
         "bytes " + ranges[0].start + "-" + ranges[0].end + "/" + length

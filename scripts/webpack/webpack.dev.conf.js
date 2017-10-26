@@ -1,6 +1,8 @@
 const path = require('path');
 const webpack = require('webpack');
-const HtmlWebpackPlugin = require('html-webpack-plugin')
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const marked = require('marked');
+const highlight = require('highlight.js');
 
 const rootPath = path.resolve(__dirname, './../../');
 
@@ -34,6 +36,18 @@ const config = {
                 'add-module-exports',
                 'transform-runtime',
               ],
+            },
+          },
+        ],
+      },
+      {
+        test: /\.css$/,
+        use: [
+          'style-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              importLoaders: 1,
             },
           },
         ],
@@ -86,6 +100,21 @@ const config = {
         test: /\.html$/,
         use: ['html-loader'],
       },
+      {
+        test: /\.md$/,
+        use: [
+          'html-loader',
+          {
+            loader: 'markdown-loader',
+            options: {
+              renderer: markedRenderer(),
+              highlight: function (code) {
+                return highlight.highlightAuto(code).value;
+              },
+            }
+          }
+        ],
+      },
     ],
   },
   resolve: {
@@ -110,3 +139,15 @@ const config = {
 };
 
 module.exports = config;
+
+// 设置marked
+function markedRenderer() {
+  const Renderer = marked.Renderer;
+  const codeParse = Renderer.prototype.code;
+
+  Renderer.prototype.code = function() {
+    return '<div class="code">' + codeParse.apply(this, Array.prototype.slice.call(arguments)).replace(/<pre>/, '<pre class="hljs">') + '</div>';
+  }
+
+  return new Renderer;
+}
