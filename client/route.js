@@ -6,11 +6,13 @@
 
 const rootRoute = {
   path: '/',
+  getComponent: () => import('components/Container'),
   indexRoute: {
-    // component: require('pages/Home'),
+    // component: import('pages/Home'),
     getComponent: () => import('pages/Home'),
   },
   childRoutes: [
+    require('pages/Algorithm/route'),
     {
       path: '*',
       getComponent: () => import('pages/Home'),
@@ -19,4 +21,3 @@ const rootRoute = {
 };
 
 export default rootRoute;
-

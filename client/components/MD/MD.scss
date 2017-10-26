@@ -1,0 +1,89 @@
+.markdown-block {
+  line-height: 27px;
+  font-size: 16px;
+  color: #2c3e50;
+
+  h1 {
+    margin: 50px 0 20px;
+    line-height: 40px;
+    font-size: 30px;
+    font-weight: 500;
+    color: #07b;
+  }
+
+  h3 {
+    margin: 20px 0;
+    line-height: 40px;
+    font-size: 21px;
+    font-weight: 500;
+  }
+
+  h5 {
+    margin: 10px 0;
+    line-height: 20px;
+    font-size: 16px;
+    font-weight: 500;
+  }
+
+  p {
+    margin: 0 0 10px;
+  }
+
+  ul {
+    margin: 0 0 10px 25px;
+
+    li {
+      line-height: 27px;
+      list-style-type: disc;
+    }
+  }
+
+  blockquote {
+    margin: 0 0 20px;
+    padding: 10px 15px;
+    background: none repeat scroll 0 0 rgba(102,128,153,.05);
+    border-color: #d6dbdf;
+    border-left-style: solid;
+    border-left-width: 10px;
+
+    p {
+      line-height: 25px;
+      font-size: 16px;
+      font-weight: 300;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  code {
+    border: 0;
+    background-color: #D6DBDF;
+    border-radius: 4px;
+    color: #2C3E50;
+    font-size: 14px;
+    padding: 2px 4px;
+    white-space: nowrap;
+  }
+
+  .code {
+    margin: 0 0 20px;
+    padding-left: 45px;
+    background-color: rgba(102, 128, 153, 0.05);
+    box-shadow: 0 1px 2px rgba(255, 255, 255, 0.1) inset, 45px 0 0 rgba(102, 128, 153, 0.05) inset, 0 1px 0 rgba(102, 128, 153, 0.05);
+
+    pre {
+      display: block;
+      padding: 15px;
+      background-color: transparent;
+
+      code {
+        padding: 0;
+        font-size: 16px;
+        background-color: transparent;
+        white-space: pre;
+      }
+    }
+  }
+}
