@@ -10,6 +10,10 @@ const route = {
       path: 'LIS',
       getComponent: () => import('./LIS'),
     },
+    {
+      path: 'LCIS',
+      getComponent: () => import('./LCIS'),
+    },
   ],
 };
 

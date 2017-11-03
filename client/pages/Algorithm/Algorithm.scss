@@ -36,6 +36,11 @@ body {
           color: #fff;
           background: #ffbf00;
         }
+
+        &.error {
+          color: #fff;
+          background: #f30;
+        }
       }
     }
   }
